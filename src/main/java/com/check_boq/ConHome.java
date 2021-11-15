@@ -46,7 +46,11 @@ public class ConHome {
       stage.show();
    }
 
-   public void eventAddMat(){
-
+   public void eventAddMat(ActionEvent event) throws IOException {
+      root = FXMLLoader.load(getClass().getResource("addMat.fxml"));
+      stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+      scene = new Scene(root);
+      stage.setScene(scene);
+      stage.show();
    }
 }
