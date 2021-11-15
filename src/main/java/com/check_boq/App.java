@@ -16,7 +16,6 @@ public class App extends Application {
         stage.setScene(scene);
         stage.setResizable(false);
         stage.show();
-        System.out.println("Hello World.");
     }
 
     public static void main(String[] args) {
