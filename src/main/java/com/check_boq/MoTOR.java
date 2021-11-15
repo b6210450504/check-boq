@@ -57,4 +57,20 @@ public class MoTOR {
     public void setTO_GroupID(String TO_GroupID) {
         this.TO_GroupID = TO_GroupID;
     }
+
+    @Override
+    public String toString() {
+        return "MoTOR{" +
+                "TO_Name='" + TO_Name + '\'' +
+                ", TO_Materials='" + TO_Materials + '\'' +
+                ", TO_Member='" + TO_Member + '\'' +
+                ", TO_Period=" + TO_Period +
+                ", TO_GroupID='" + TO_GroupID + '\'' +
+                '}';
+    }
+
+    public String DB(){
+        return "\"" + TO_Materials + "\"" + "," + TO_GroupID + "," + "\"" + TO_Member + "\"" + "," +
+                TO_Period + "," + "\"" + TO_Name + "\"" ;
+    }
 }

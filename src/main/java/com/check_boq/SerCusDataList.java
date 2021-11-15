@@ -83,6 +83,25 @@ public class SerCusDataList implements SerDataList {
         }
     }
 
+    public ArrayList<String> returnNameArraylist(){
+        ArrayList<String> name = new ArrayList<>() ;
+        getCustomerDatabase() ;
+        for(MoCustomer s:customerArrayList){
+            name.add(s.getCS_Name()) ;
+        }
+        return name ;
+    }
+
+    public int searchIDByName(String name){
+        getCustomerDatabase() ;
+        for(MoCustomer s:customerArrayList){
+            if(s.getCS_Name().equals(name)){
+                return s.getCS_ID() ;
+            }
+        }
+        return 0 ;
+    }
+
     public void deleteCustomer(int id){
         String query = "DELETE FROM check_boq.customer WHERE CS_ID =" + id ;
         try {
