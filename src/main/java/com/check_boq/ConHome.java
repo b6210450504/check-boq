@@ -34,8 +34,12 @@ public class ConHome {
       stage.show();
    }
 
-   public void eventCreateBoq(){
-
+   public void eventCreateBoq(ActionEvent event) throws IOException {
+      root = FXMLLoader.load(getClass().getResource("selectTor.fxml"));
+      stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+      scene = new Scene(root);
+      stage.setScene(scene);
+      stage.show();
    }
 
    public void eventAddCus(ActionEvent event) throws IOException {

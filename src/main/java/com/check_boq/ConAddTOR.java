@@ -201,16 +201,16 @@ public class ConAddTOR {
             for(MoMatForTor mat : matForTorArrayList){
                 matStr += mat.getMat_Name() ;
                 matStr += "=" + mat.getMat_Qty() ;
-                matStr += ", " ;
+                matStr += "," ;
             }
 
             for(MoMem mem : memArraylist){
                 memStr += mem.getMem_Name() ;
-                memStr += ", "  ;
+                memStr += ","  ;
             }
 
-            matStr = matStr.substring(0,matStr.length()-2) ;
-            memStr = memStr.substring(0,memStr.length()-2) ;
+            matStr = matStr.substring(0,matStr.length()-1) ;
+            memStr = memStr.substring(0,memStr.length()-1) ;
 
             MoTOR temp = new MoTOR(progNameTextField.getText(),matStr,memStr,Integer.valueOf(periodTextField.getText()),
                     String.valueOf(serCusDataList.searchIDByName(cusChoiceBox.getValue())) ) ;
