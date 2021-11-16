@@ -89,7 +89,7 @@
             <Font name="Arial Rounded MT Bold" size="16.0" />
          </font>
       </Text>
-      <Button layoutX="622.0" layoutY="702.0" mnemonicParsing="false" onAction="#eventAdd" prefHeight="39.0" prefWidth="63.0" text="Add">
+      <Button fx:id="addButton" layoutX="622.0" layoutY="702.0" mnemonicParsing="false" onAction="#eventAdd" prefHeight="39.0" prefWidth="63.0" text="Add">
          <font>
             <Font name="Arial Rounded MT Bold" size="17.0" />
          </font>
@@ -113,15 +113,11 @@
       <TextField fx:id="find" layoutX="752.0" layoutY="479.0" prefHeight="25.0" prefWidth="248.0" />
       <Text layoutX="708.0" layoutY="496.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Search:" />
       <Separator layoutX="821.0" layoutY="518.0" orientation="VERTICAL" prefHeight="225.0" prefWidth="6.0" style="-fx-background-color: blue;" />
-      <Button layoutX="854.0" layoutY="554.0" mnemonicParsing="false" prefHeight="51.0" prefWidth="146.0" text="Create BOQ">
+      <Button fx:id="createBoqButton" layoutX="851.0" layoutY="614.0" mnemonicParsing="false" onAction="#eventCreateBOQ" prefHeight="51.0" prefWidth="146.0" text="Create BOQ">
          <font>
             <Font name="Arial Rounded MT Bold" size="20.0" />
          </font>
       </Button>
-      <Button layoutX="854.0" layoutY="637.0" mnemonicParsing="false" prefHeight="51.0" prefWidth="146.0" text="View Excel">
-         <font>
-            <Font name="Arial Rounded MT Bold" size="20.0" />
-         </font>
-      </Button>
+      <Label fx:id="errLabel" layoutX="833.0" layoutY="583.0" prefHeight="17.0" prefWidth="184.0" textAlignment="CENTER" textFill="RED" />
    </children>
 </AnchorPane>

@@ -8,6 +8,7 @@ import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -28,7 +29,9 @@ public class ConCreateBoq {
     @FXML
     TextField qtyTextField, find ;
     @FXML
-    Label totalLabel, idLabel, nameLabel, priceLabel ;
+    Label totalLabel, idLabel, nameLabel, priceLabel, errLabel ;
+    @FXML
+    Button createBoqButton,addButton ;
 
     private Stage stage;
     private Scene scene;
@@ -41,7 +44,10 @@ public class ConCreateBoq {
     ArrayList<MoMatForBoq> moMatForBoqArrayList ;
     ObservableList<MoMatForBoq> moMatForBoqObservableList ;
 
+    SerBoqDataList serBoqDataList ;
+
     MoTOR tor ;
+    long total = 0 ;
     public void setTOR(MoTOR seTOR){
         this.tor = seTOR ;
     }
@@ -53,6 +59,10 @@ public class ConCreateBoq {
             @Override
             public void run(){
                 serMatDataList = new SerMatDataList() ;
+                serBoqDataList = new SerBoqDataList() ;
+                qtyTextField.setDisable(true);
+                errLabel.setMaxWidth(Double.MAX_VALUE);
+                errLabel.setAlignment(Pos.CENTER);
                 masterData = FXCollections.observableList(serMatDataList.getMoMaterialArrayList()) ;
                 showTableMat() ;
                 showTORDes();
@@ -115,6 +125,7 @@ public class ConCreateBoq {
 
 
     public void showSelectedMat(MoMaterial select){
+        qtyTextField.setDisable(false);
         selectedMaterial = select ;
         idLabel.setText(String.valueOf(select.getMat_ID()));
         nameLabel.setText(select.getMat_Name());
@@ -152,18 +163,52 @@ public class ConCreateBoq {
 
     public void eventAdd(){
         if(matTable.getSelectionModel().isEmpty() ){
-            // err label
+            errLabel.setText("Please select some Material");
         }
         else if(qtyTextField.getText().isEmpty() && !matTable.getSelectionModel().isEmpty()){
             qtyTextField.setText("1");
         }
         else{
-            moMatForBoqArrayList.add( new MoMatForBoq(selectedMaterial.getMat_ID(),selectedMaterial.getMat_Name(),
-                    selectedMaterial.getMat_Price(),Integer.valueOf(qtyTextField.getText()))) ;
+            MoMatForBoq temp = new MoMatForBoq(selectedMaterial.getMat_ID(),selectedMaterial.getMat_Name(),
+                    selectedMaterial.getMat_Price(),Integer.valueOf(qtyTextField.getText())) ;
+            boolean duplicated  = false ;
+            for (MoMatForBoq s:moMatForBoqArrayList) {
+                if(s.getMat_ID() == temp.getMat_ID()){
+                    s.setMat_Qty(temp.getMat_Qty()+s.getMat_Qty());
+                    s.setMat_Total(s.getMat_Price() * s.getMat_Qty());
+                    duplicated = true ;
+                }
+            }
+            if(duplicated == false){
+                moMatForBoqArrayList.add(temp) ;
+            }
             showMatBoqTable();
+            for (MoMatForBoq v:moMatForBoqArrayList) {
+                total += v.getMat_Total() ;
+            }
+            totalLabel.setText(String.valueOf(total));
             onClicked();
         }
     }
+
+    public void eventCreateBOQ(){
+        if(moMatForBoqArrayList.isEmpty()){
+            errLabel.setText("Please add some material.");
+        }
+        else{
+            String matString = "" ;
+            for (MoMatForBoq m:moMatForBoqArrayList) {
+                matString += m.getMat_Name() + "=" +m.getMat_Qty() + "," ;
+            }
+            matString = matString.substring(0,matString.length()-1) ;
+            MoBOQ temp = new MoBOQ(Integer.valueOf(tor.getTO_GroupID()), tor.getTO_Name(),tor.getTO_Member(),matString,total,tor.getTO_Period()) ;
+            serBoqDataList.addBOQToDatabase(temp);
+            errLabel.setText("Create BOQ complete.");
+            createBoqButton.setDisable(true);
+            addButton.setDisable(true);
+        }
+    }
+
     public void eventBackButton(ActionEvent event) throws IOException {
         root = FXMLLoader.load(getClass().getResource("selectTor.fxml"));
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
