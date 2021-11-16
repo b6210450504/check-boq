@@ -10,7 +10,6 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-
 <AnchorPane prefHeight="768.0" prefWidth="1024.0" style="-fx-background-color: FAFAFA;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.check_boq.ConHome">
    <children>
       <Text layoutX="61.0" layoutY="117.0" strokeType="OUTSIDE" strokeWidth="0.0" text="BOQ Check">
@@ -18,7 +17,7 @@
             <Font name="Arial Rounded MT Bold" size="68.0" />
          </font>
       </Text>
-      <VBox layoutX="701.0" layoutY="235.0">
+      <VBox layoutX="700.0" layoutY="164.0">
          <children>
             <Button mnemonicParsing="false" onAction="#eventAddTor" prefHeight="68.0" prefWidth="215.0" style="-fx-background-radius: 30;" text="Add TOR">
                <font>
@@ -41,6 +40,17 @@
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
+            </Button>
+            <Button mnemonicParsing="false" onAction="#checkBoqButton" prefHeight="68.0" prefWidth="215.0" style="-fx-background-radius: 30;" text="Check Boq">
+               <font>
+                  <Font name="Arial Rounded MT Bold" size="28.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+               <VBox.margin>
+                  <Insets bottom="25.0" />
+               </VBox.margin>
             </Button>
             <Button mnemonicParsing="false" onAction="#eventAddCus" prefHeight="68.0" prefWidth="215.0" style="-fx-background-radius: 30;" text="Add Customer">
                <font>

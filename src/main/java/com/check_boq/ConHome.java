@@ -57,4 +57,8 @@ public class ConHome {
       stage.setScene(scene);
       stage.show();
    }
+
+   public void checkBoqButton(ActionEvent event){
+
+   }
 }
