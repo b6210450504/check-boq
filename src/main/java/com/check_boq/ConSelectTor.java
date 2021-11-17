@@ -130,13 +130,15 @@ public class ConSelectTor {
         nameTextField.clear();
     }
     public void eventCreateBoq(ActionEvent event) throws IOException {
-        Button b = (Button) event.getSource();
-        Stage stage = (Stage) b.getScene().getWindow();
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("createBoq.fxml"));
-        stage.setScene(new Scene(loader.load(), 1024, 768));
-        ConCreateBoq createBOQController = loader.getController() ;
-        createBOQController.setTOR(tor);
-        stage.show();
+        if(!torTable.getSelectionModel().isEmpty()){
+            Button b = (Button) event.getSource();
+            Stage stage = (Stage) b.getScene().getWindow();
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("createBoq.fxml"));
+            stage.setScene(new Scene(loader.load(), 1024, 768));
+            ConCreateBoq createBOQController = loader.getController() ;
+            createBOQController.setTOR(tor);
+            stage.show();
+        }
     }
 
     public void showSelectedTor(MoTOR selectedTOR){
