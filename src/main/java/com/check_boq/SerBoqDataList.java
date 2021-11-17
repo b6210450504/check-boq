@@ -85,4 +85,14 @@ public class SerBoqDataList {
         }
     }
 
+    public void delBoqOnDatabase(int id){
+//        DELETE FROM Customers WHERE CustomerName='Alfreds Futterkiste';
+        String query = "DELETE FROM check_boq.boq WHERE BO_ID = " + id ;
+        try{
+            Statement statement = connectionDb.createStatement();
+            statement.executeUpdate(query) ;
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+    }
 }

@@ -103,17 +103,17 @@
             <Font name="Arial Rounded MT Bold" size="14.0" />
          </font>
       </Button>
-      <Button layoutX="782.0" layoutY="648.0" mnemonicParsing="false" text="Accept and Send">
+      <Button fx:id="accButton" layoutX="782.0" layoutY="648.0" mnemonicParsing="false" onAction="#eventAccept" text="Accept and Send">
          <font>
             <Font name="Arial Rounded MT Bold" size="20.0" />
          </font>
       </Button>
-      <Button layoutX="564.0" layoutY="648.0" mnemonicParsing="false" text="Decline BOQ">
+      <Button fx:id="declineButton" layoutX="564.0" layoutY="648.0" mnemonicParsing="false" onAction="#eventDecline" text="Decline BOQ">
          <font>
             <Font name="Arial Rounded MT Bold" size="20.0" />
          </font>
       </Button>
-      <Button layoutX="699.0" layoutY="704.0" mnemonicParsing="false" text="Get Excel">
+      <Button fx:id="excelButton" layoutX="699.0" layoutY="704.0" mnemonicParsing="false" onAction="#eventOpenExcel" text="Get Excel">
          <font>
             <Font name="Arial Rounded MT Bold" size="20.0" />
          </font>
@@ -136,5 +136,6 @@
             <Font name="Arial Rounded MT Bold" size="15.0" />
          </font>
       </Text>
+      <Label fx:id="errLabel" layoutX="561.0" layoutY="617.0" prefHeight="21.0" prefWidth="411.0" textAlignment="CENTER" textFill="RED" />
    </children>
 </AnchorPane>

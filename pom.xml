@@ -38,6 +38,29 @@
             <version>${junit.version}</version>
             <scope>test</scope>
         </dependency>
+
+        <!-- dependency used for XLSX file format -->
+        <dependency>
+            <groupId>org.apache.poi</groupId>
+            <artifactId>poi-ooxml</artifactId>
+            <version>5.1.0</version>
+        </dependency>
+
+        <!-- dependency used for XLS older file format
+             (added for information) -->
+        <dependency>
+            <groupId>org.apache.poi</groupId>
+            <artifactId>poi</artifactId>
+            <version>5.1.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.sun.mail</groupId>
+            <artifactId>javax.mail</artifactId>
+            <version>1.6.2</version>
+        </dependency>
+
+
     </dependencies>
 
     <build>
