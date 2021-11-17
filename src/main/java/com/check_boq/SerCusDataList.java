@@ -48,8 +48,8 @@ public class SerCusDataList implements SerDataList {
             }
             customerArrayList = tempCusArrayList ;
         }
-        catch (SQLException throwables) {
-            throwables.printStackTrace();
+        catch (SQLException e) {
+            e.printStackTrace();
         }
     }
 
@@ -61,12 +61,11 @@ public class SerCusDataList implements SerDataList {
         query+=customer.getCS_Phone()+ "\"" +"," ;
         query+= "\"" ;
         query+=customer.getCS_Email() + "\"" + ")" ;
-//        System.out.println(query);
         try{
             Statement statement = connectionDb.createStatement();
             statement.executeUpdate(query) ;
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
     }
     public void updateCusToDatabase(MoCustomer newCus, MoCustomer oldCus){

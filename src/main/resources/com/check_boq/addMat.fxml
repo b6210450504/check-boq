@@ -31,7 +31,7 @@
       </Text>
       <VBox alignment="CENTER" layoutX="442.0" layoutY="170.0">
          <children>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Add / Edit Customer">
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Add / Edit Material">
                <font>
                   <Font name="Arial Rounded MT Bold" size="26.0" />
                </font>

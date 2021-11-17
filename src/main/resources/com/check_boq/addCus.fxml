@@ -118,7 +118,7 @@
       </VBox>
       <HBox layoutX="649.0" layoutY="545.0">
          <children>
-            <Button fx:id="addButton" mnemonicParsing="false" onAction="#eventAddButton" text="Add">
+            <Button fx:id="addButton" mnemonicParsing="false" onAction="#eventAddButton" text="ADD">
                <font>
                   <Font name="Arial Rounded MT Bold" size="19.0" />
                </font>
@@ -129,7 +129,7 @@
                   <Insets right="25.0" />
                </HBox.margin>
             </Button>
-            <Button fx:id="editButton" mnemonicParsing="false" onAction="#eventEditButton" text="Edit">
+            <Button fx:id="editButton" mnemonicParsing="false" onAction="#eventEditButton" text="EDIT">
                <font>
                   <Font name="Arial Rounded MT Bold" size="19.0" />
                </font>
