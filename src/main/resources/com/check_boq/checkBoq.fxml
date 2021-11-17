@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="768.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.check_boq.ConCheckBoq">
+   <children>
+      <Text layoutX="29.0" layoutY="80.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Check BOQ">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="44.0" />
+         </font>
+      </Text>
+      <TextArea editable="false" layoutX="32.0" layoutY="347.0" prefHeight="363.0" prefWidth="422.0" />
+      <Text layoutX="29.0" layoutY="332.0" strokeType="OUTSIDE" strokeWidth="0.0" text="TOR Description">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="25.0" />
+         </font>
+      </Text>
+      <Text layoutX="607.0" layoutY="75.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ID:">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="22.0" />
+         </font>
+      </Text>
+      <Text layoutX="532.0" layoutY="112.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Group ID:">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="22.0" />
+         </font>
+      </Text>
+      <Separator layoutX="495.0" layoutY="23.0" orientation="VERTICAL" prefHeight="699.0" prefWidth="0.0" style="-fx-background-color: black;" />
+      <Text layoutX="567.0" layoutY="152.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Name:">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="22.0" />
+         </font>
+      </Text>
+      <Text layoutX="650.0" layoutY="40.0" strokeType="OUTSIDE" strokeWidth="0.0" text="BOQ Information">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="28.0" />
+         </font>
+      </Text>
+      <Text layoutX="515.0" layoutY="226.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Participants:">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="22.0" />
+         </font>
+      </Text>
+      <Text layoutX="563.0" layoutY="188.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Period:">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="22.0" />
+         </font>
+      </Text>
+      <Label layoutX="653.0" layoutY="53.0" prefHeight="27.0" prefWidth="311.0" text="...">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="20.0" />
+         </font>
+      </Label>
+      <Label layoutX="653.0" layoutY="90.0" prefHeight="27.0" prefWidth="311.0" text="...">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="20.0" />
+         </font>
+      </Label>
+      <Label layoutX="653.0" layoutY="130.0" prefHeight="27.0" prefWidth="311.0" text="...">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="20.0" />
+         </font>
+      </Label>
+      <Label layoutX="653.0" layoutY="166.0" prefHeight="27.0" prefWidth="213.0" text="...">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="20.0" />
+         </font>
+      </Label>
+      <Text layoutX="774.0" layoutY="188.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Day">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="22.0" />
+         </font>
+      </Text>
+      <TextArea editable="false" layoutX="662.0" layoutY="204.0" prefHeight="90.0" prefWidth="302.0" />
+      <Text layoutX="542.0" layoutY="336.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Materials:">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="22.0" />
+         </font>
+      </Text>
+      <TableView layoutX="547.0" layoutY="347.0" prefHeight="240.0" prefWidth="431.0" />
+      <Text layoutX="29.0" layoutY="112.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Select BOQ to Check">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="22.0" />
+         </font>
+      </Text>
+      <TableView layoutX="32.0" layoutY="123.0" prefHeight="162.0" prefWidth="422.0" />
+      <Button layoutX="14.0" layoutY="11.0" mnemonicParsing="false" onAction="#eventBack" text="Back">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="14.0" />
+         </font>
+      </Button>
+      <Button layoutX="782.0" layoutY="648.0" mnemonicParsing="false" text="Accept and Send">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="20.0" />
+         </font>
+      </Button>
+      <Button layoutX="564.0" layoutY="648.0" mnemonicParsing="false" text="Decline BOQ">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="20.0" />
+         </font>
+      </Button>
+      <Button layoutX="699.0" layoutY="704.0" mnemonicParsing="false" text="Get Excel">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="20.0" />
+         </font>
+      </Button>
+      <Separator layoutX="745.0" layoutY="641.0" orientation="VERTICAL" prefHeight="51.0" prefWidth="6.0" style="-fx-background-color: black;" />
+      <Text layoutX="259.0" layoutY="307.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Search:" />
+      <TextField layoutX="305.0" layoutY="290.0" />
+      <Text layoutX="790.0" layoutY="334.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Search:" />
+      <TextField layoutX="829.0" layoutY="317.0" />
+      <Text layoutX="745.0" layoutY="611.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Total:">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="18.0" />
+         </font>
+      </Text>
+      <Label layoutX="799.0" layoutY="592.0" prefHeight="25.0" prefWidth="159.0" text="..." textFill="#3c00ff">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="15.0" />
+         </font>
+      </Label>
+      <Text layoutX="964.0" layoutY="609.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Baht">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="15.0" />
+         </font>
+      </Text>
+   </children>
+</AnchorPane>

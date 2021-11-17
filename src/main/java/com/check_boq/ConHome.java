@@ -58,7 +58,11 @@ public class ConHome {
       stage.show();
    }
 
-   public void checkBoqButton(ActionEvent event){
-
+   public void checkBoqButton(ActionEvent event) throws IOException {
+      root = FXMLLoader.load(getClass().getResource("authen.fxml"));
+      stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+      scene = new Scene(root);
+      stage.setScene(scene);
+      stage.show();
    }
 }
