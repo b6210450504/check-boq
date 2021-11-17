@@ -10,7 +10,7 @@ public class SerDatabaseConnection {
 
         String databaseName = "check_boq";
         String databaseUser = "root";
-        String databasePass = "password";
+        String databasePass = "_JL=z+jV7x%Fu+aHYp$";
         String url = "jdbc:mysql://localhost/" +databaseName;
 
         try{

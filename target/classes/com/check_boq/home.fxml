@@ -21,7 +21,7 @@
          <children>
             <Button mnemonicParsing="false" onAction="#eventAddTor" prefHeight="68.0" prefWidth="215.0" style="-fx-background-radius: 30;" text="Add TOR">
                <font>
-                  <Font name="Arial Rounded MT Bold" size="28.0" />
+                  <Font name="Arial Rounded MT Bold" size="25.0" />
                </font>
                <VBox.margin>
                   <Insets bottom="25.0" />
@@ -32,7 +32,7 @@
             </Button>
             <Button mnemonicParsing="false" onAction="#eventCreateBoq" prefHeight="68.0" prefWidth="215.0" style="-fx-background-radius: 30;" text="Create BOQ">
                <font>
-                  <Font name="Arial Rounded MT Bold" size="28.0" />
+                  <Font name="Arial Rounded MT Bold" size="25.0" />
                </font>
                <VBox.margin>
                   <Insets bottom="25.0" />
@@ -43,7 +43,7 @@
             </Button>
             <Button mnemonicParsing="false" onAction="#checkBoqButton" prefHeight="68.0" prefWidth="215.0" style="-fx-background-radius: 30;" text="Check BOQ">
                <font>
-                  <Font name="Arial Rounded MT Bold" size="28.0" />
+                  <Font name="Arial Rounded MT Bold" size="25.0" />
                </font>
                <cursor>
                   <Cursor fx:constant="HAND" />
@@ -65,7 +65,7 @@
             </Button>
             <Button mnemonicParsing="false" onAction="#eventAddMat" prefHeight="68.0" prefWidth="215.0" style="-fx-background-radius: 30;" text="Add Material">
                <font>
-                  <Font name="Arial Rounded MT Bold" size="28.0" />
+                  <Font name="Arial Rounded MT Bold" size="25.0" />
                </font>
                <cursor>
                   <Cursor fx:constant="HAND" />

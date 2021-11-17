@@ -29,7 +29,6 @@
             <Font name="Arial Rounded MT Bold" size="17.0" />
          </font>
       </Text>
-      <Button layoutX="16.0" layoutY="14.0" mnemonicParsing="false" onAction="#eventBackButton" text="Back" />
       <VBox alignment="CENTER" layoutX="442.0" layoutY="170.0">
          <children>
             <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Add / Edit Customer">
@@ -109,7 +108,7 @@
       </VBox>
       <HBox layoutX="521.0" layoutY="460.0">
          <children>
-            <Button fx:id="addButton" mnemonicParsing="false" onAction="#eventAddButton" text="Add">
+            <Button fx:id="addButton" mnemonicParsing="false" onAction="#eventAddButton" text="ADD">
                <font>
                   <Font name="Arial Rounded MT Bold" size="19.0" />
                </font>
@@ -132,5 +131,13 @@
             <Font name="Arial Rounded MT Bold" size="15.0" />
          </font>
       </Label>
+      <Button layoutX="16.0" layoutY="14.0" mnemonicParsing="false" onAction="#eventBackButton" prefHeight="36.0" prefWidth="63.0" style="-fx-background-radius: 35;" text="Back">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="15.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
    </children>
 </AnchorPane>

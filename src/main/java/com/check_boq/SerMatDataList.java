@@ -56,6 +56,18 @@ public class SerMatDataList {
         }
     }
 
+    public void updateMatDataBase(MoMaterial moMaterial){
+        String query = "UPDATE check_boq.materials SET " ;
+        query+= "Mat_Price = " + "\"" + moMaterial.getMat_Price() + "\"";
+        query+= " WHERE " + "Mat_ID = " + showMatID(moMaterial.getMat_Name()) ;
+        try{
+            Statement statement = connectionDb.createStatement();
+            statement.executeUpdate(query) ;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
     public MoMaterial getMatInfoByName(String name){
         for (MoMaterial n: moMaterialArrayList) {
             if(n.getMat_Name().equals(name)){
@@ -63,6 +75,31 @@ public class SerMatDataList {
             }
         }
         return null ;
+    }
+
+    public boolean checkMat(String mat){
+        for (MoMaterial moMaterial : moMaterialArrayList){
+            if (moMaterial.getMat_Name().equalsIgnoreCase(mat))
+                return true;
+        }
+        return false;
+    }
+
+    public void editMat(String mat, int unit){
+        for (MoMaterial moMaterial : moMaterialArrayList){
+            if (moMaterial.getMat_Name().equalsIgnoreCase(mat)){
+                moMaterial.setMat_Price(unit);
+            }
+        }
+    }
+
+    public int showMatID(String mat){
+        for (MoMaterial moMaterial : moMaterialArrayList){
+            if (moMaterial.getMat_Name().equalsIgnoreCase(mat)){
+                return moMaterial.getMat_ID();
+            }
+        }
+        return 0;
     }
 
     public ArrayList<MoMaterial> getMoMaterialArrayList(){

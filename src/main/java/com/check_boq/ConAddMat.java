@@ -21,22 +21,22 @@ import java.util.ArrayList;
 
 public class ConAddMat {
     @FXML
-    TableView matTable ;
+    TableView<MoMaterial> matTable ;
     @FXML
     TextField nameTextField, priceTextField ;
     @FXML
     Label iDLabel,labelErr ;
     @FXML
-    Button addButton, editButton, delButton ;
+    Button addButton, delButton ;
 
 
     private Stage stage;
     private Scene scene;
     private Parent root;
 
-    SerMatDataList serMatDataList ;
-    MoMaterial selectedMat ;
-    ObservableList<MoMaterial> moMaterialObservableList ;
+    private SerMatDataList serMatDataList ;
+    private MoMaterial selectedMat ;
+    private ObservableList<MoMaterial> moMaterialObservableList ;
 
     public void initialize(){
         Platform.runLater(new Runnable() {
@@ -44,10 +44,9 @@ public class ConAddMat {
             public void run(){
                 serMatDataList = new SerMatDataList() ;
                 showTable();
-//                editButton.setDisable(true);
                 matTable.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
                     if(newValue != null){
-                        selectMat((MoMaterial) newValue) ;
+                        selectMat(newValue) ;
                     }
                 });
                 priceTextField.textProperty().addListener(new ChangeListener<String>() {
@@ -79,8 +78,6 @@ public class ConAddMat {
 
     public void selectMat(MoMaterial select){
         selectedMat = select ;
-//        addButton.setDisable(true);
-//        editButton.setDisable(false);
         iDLabel.setText(String.valueOf(select.getMat_ID()));
         nameTextField.setText(select.getMat_Name());
         priceTextField.setText(String.valueOf(select.getMat_Price()));
@@ -93,29 +90,47 @@ public class ConAddMat {
         iDLabel.setText("...");
         nameTextField.clear();
         priceTextField.clear();
+        labelErr.setText("");
     }
 
     public void eventAddButton(){
         if(nameTextField.getText().isEmpty() || priceTextField.getText().isEmpty()){
+            labelErr.setTextFill(Color.RED);
             labelErr.setText("Please insert information.");
         }
-        else if(nameTextField.getText().length() > 100 || Integer.valueOf(priceTextField.getText()) <= 0){
+        else if(nameTextField.getText().length() > 100 || Integer.parseInt(priceTextField.getText()) <= 0){
+            labelErr.setTextFill(Color.RED);
             labelErr.setText("Wrong information insert.");
         }
         else{
-            MoMaterial tempMat = new MoMaterial (nameTextField.getText(),Integer.valueOf(priceTextField.getText())) ;
-            serMatDataList.insertToDatabase(tempMat);
-            showTable();
-            labelErr.setTextFill(Color.GREEN);
-            labelErr.setText("Add Material Complete.");
-            priceTextField.clear();
-            nameTextField.clear();
-            iDLabel.setText("...");
-            matTable.getSelectionModel().clearSelection();
+            if (serMatDataList.checkMat(nameTextField.getText()) && matTable.getSelectionModel().isEmpty()){
+                labelErr.setTextFill(Color.RED);
+                labelErr.setText("Duplicate material.");
+            }
+            else if (serMatDataList.checkMat(nameTextField.getText()) && !matTable.getSelectionModel().isEmpty()){
+                MoMaterial tempMat = new MoMaterial(nameTextField.getText(), Integer.parseInt(priceTextField.getText()));
+                serMatDataList.updateMatDataBase(tempMat);
+                showTable();
+                labelErr.setTextFill(Color.GREEN);
+                labelErr.setText("Edit Material Complete.");
+                priceTextField.clear();
+                nameTextField.clear();
+                iDLabel.setText("...");
+                matTable.getSelectionModel().clearSelection();
+            }
+            else {
+                MoMaterial tempMat = new MoMaterial(nameTextField.getText(), Integer.parseInt(priceTextField.getText()));
+                serMatDataList.insertToDatabase(tempMat);
+                showTable();
+                labelErr.setTextFill(Color.GREEN);
+                labelErr.setText("Add Material Complete.");
+                priceTextField.clear();
+                nameTextField.clear();
+                iDLabel.setText("...");
+                matTable.getSelectionModel().clearSelection();
+            }
         }
     }
-
-
 
     public void eventDel(){
         if(!matTable.getSelectionModel().isEmpty()){
@@ -132,7 +147,6 @@ public class ConAddMat {
             labelErr.setText("Please Select Material.");
         }
     }
-
 
     public void eventBackButton(ActionEvent event) throws IOException {
         root = FXMLLoader.load(getClass().getResource("home.fxml"));
