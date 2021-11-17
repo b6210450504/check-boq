@@ -41,7 +41,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Button>
-            <Button mnemonicParsing="false" onAction="#checkBoqButton" prefHeight="68.0" prefWidth="215.0" style="-fx-background-radius: 30;" text="Check Boq">
+            <Button mnemonicParsing="false" onAction="#checkBoqButton" prefHeight="68.0" prefWidth="215.0" style="-fx-background-radius: 30;" text="Check BOQ">
                <font>
                   <Font name="Arial Rounded MT Bold" size="28.0" />
                </font>

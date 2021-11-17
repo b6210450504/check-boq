@@ -15,6 +15,7 @@ public class MoMatForBoq {
         Mat_Total = mat_Price * mat_Qty ;
     }
 
+
     public int getMat_ID() {
         return Mat_ID;
     }

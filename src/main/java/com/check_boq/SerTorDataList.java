@@ -64,6 +64,15 @@ public class SerTorDataList {
         }
     }
 
+    public MoTOR getTorByProjName(String name){
+        for (MoTOR t:torArrayList) {
+            if(t.getTO_Name().equals(name)){
+                return  t ;
+            }
+        }
+        return null ;
+    }
+
     public ArrayList<MoTOR> getTorArrayList(){
         getDataTorFromDataBase() ;
         return torArrayList ;

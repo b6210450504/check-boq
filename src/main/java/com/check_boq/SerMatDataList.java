@@ -56,6 +56,15 @@ public class SerMatDataList {
         }
     }
 
+    public MoMaterial getMatInfoByName(String name){
+        for (MoMaterial n: moMaterialArrayList) {
+            if(n.getMat_Name().equals(name)){
+                return n ;
+            }
+        }
+        return null ;
+    }
+
     public ArrayList<MoMaterial> getMoMaterialArrayList(){
         getDataFromDatabase() ;
         return moMaterialArrayList ;

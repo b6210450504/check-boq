@@ -102,6 +102,18 @@ public class SerCusDataList implements SerDataList {
         return 0 ;
     }
 
+    public MoCustomer searchCusByID(int id){
+        getCustomerDatabase() ;
+        for(MoCustomer s:customerArrayList){
+            if(s.getCS_ID() == id){
+                return s ;
+            }
+        }
+        return null ;
+    }
+
+
+
     public void deleteCustomer(int id){
         String query = "DELETE FROM check_boq.customer WHERE CS_ID =" + id ;
         try {
