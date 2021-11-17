@@ -34,5 +34,9 @@ com\check_boq\ConAddMat.class
 com\check_boq\MoTOR.class
 com\check_boq\ConCheckBoq$2.class
 com\check_boq\ConAddTOR.class
+<<<<<<< HEAD
+=======
+com\check_boq\Main.class
+>>>>>>> 38b9292f193b89ffb6ffdb94c1f9ecda73f13229
 com\check_boq\ConAddTOR$2.class
 com\check_boq\SerDataList.class

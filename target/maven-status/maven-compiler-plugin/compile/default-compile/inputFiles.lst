@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 D:\มก\KU work\work year 3\System Analysis and Design\SA-New\src\main\java\com\check_boq\SerMatDataList.java
 D:\มก\KU work\work year 3\System Analysis and Design\SA-New\src\main\java\com\check_boq\ConSelectTor.java
 D:\มก\KU work\work year 3\System Analysis and Design\SA-New\src\main\java\com\check_boq\MoMaterial.java
@@ -22,3 +23,30 @@ D:\มก\KU work\work year 3\System Analysis and Design\SA-New\src\main\java\co
 D:\มก\KU work\work year 3\System Analysis and Design\SA-New\src\main\java\com\check_boq\MoMatForBoq.java
 D:\มก\KU work\work year 3\System Analysis and Design\SA-New\src\main\java\module-info.java
 D:\มก\KU work\work year 3\System Analysis and Design\SA-New\src\main\java\com\check_boq\SerDatabaseConnection.java
+=======
+E:\check_boq\src\main\java\com\check_boq\ConAddTOR.java
+E:\check_boq\src\main\java\com\check_boq\ConCheckBoq.java
+E:\check_boq\src\main\java\com\check_boq\ConSelectTor.java
+E:\check_boq\src\main\java\com\check_boq\ConCreateBoq.java
+E:\check_boq\src\main\java\com\check_boq\TorTable.java
+E:\check_boq\src\main\java\com\check_boq\Main.java
+E:\check_boq\src\main\java\module-info.java
+E:\check_boq\src\main\java\com\check_boq\SerDatabaseConnection.java
+E:\check_boq\src\main\java\com\check_boq\MoTOR.java
+E:\check_boq\src\main\java\com\check_boq\MoMatForBoq.java
+E:\check_boq\src\main\java\com\check_boq\ConHome.java
+E:\check_boq\src\main\java\com\check_boq\SerTorDataList.java
+E:\check_boq\src\main\java\com\check_boq\ConAddCustomer.java
+E:\check_boq\src\main\java\com\check_boq\ConAuthen.java
+E:\check_boq\src\main\java\com\check_boq\App.java
+E:\check_boq\src\main\java\com\check_boq\MoMaterial.java
+E:\check_boq\src\main\java\com\check_boq\MoMem.java
+E:\check_boq\src\main\java\com\check_boq\SerCusDataList.java
+E:\check_boq\src\main\java\com\check_boq\SerDataList.java
+E:\check_boq\src\main\java\com\check_boq\SerBoqDataList.java
+E:\check_boq\src\main\java\com\check_boq\ConAddMat.java
+E:\check_boq\src\main\java\com\check_boq\MoBOQ.java
+E:\check_boq\src\main\java\com\check_boq\MoMatForTor.java
+E:\check_boq\src\main\java\com\check_boq\MoCustomer.java
+E:\check_boq\src\main\java\com\check_boq\SerMatDataList.java
+>>>>>>> 38b9292f193b89ffb6ffdb94c1f9ecda73f13229
