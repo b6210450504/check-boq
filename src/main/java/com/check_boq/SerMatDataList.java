@@ -30,8 +30,8 @@ public class SerMatDataList {
             }
             moMaterialArrayList = tempMoList ;
         }
-        catch (SQLException throwables) {
-            throwables.printStackTrace();
+        catch (SQLException e) {
+            e.printStackTrace();
         }
     }
 
@@ -41,8 +41,8 @@ public class SerMatDataList {
         try{
             Statement statement = connectionDb.createStatement();
             statement.executeUpdate(query) ;
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
     }
 
@@ -51,8 +51,8 @@ public class SerMatDataList {
         try{
             Statement statement = connectionDb.createStatement();
             statement.executeUpdate(query) ;
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
     }
 

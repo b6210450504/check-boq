@@ -136,7 +136,6 @@ public class ConAddMat {
         if(!matTable.getSelectionModel().isEmpty()){
             serMatDataList.delMatDataBase(selectedMat.getMat_ID()) ;
             matTable.getSelectionModel().clearSelection();
-            matTable.getSelectionModel().clearSelection();
             iDLabel.setText("...");
             nameTextField.clear();
             priceTextField.clear();

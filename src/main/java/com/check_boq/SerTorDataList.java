@@ -29,8 +29,8 @@ public class SerTorDataList {
             }
             torArrayList = tempTorArrayList ;
         }
-        catch (SQLException throwables) {
-            throwables.printStackTrace();
+        catch (SQLException e) {
+            e.printStackTrace();
         }
     }
 
@@ -39,9 +39,27 @@ public class SerTorDataList {
         try{
             Statement statement = connectionDb.createStatement();
             statement.executeUpdate(query) ;
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
+    }
+
+    public void delTorDataBase(int id){
+        String query = "DELETE FROM check_boq.tor WHERE TO_GroupID = " + id ;
+        try{
+            Statement statement = connectionDb.createStatement();
+            statement.executeUpdate(query) ;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public boolean checkTor(String tor){
+        for (MoTOR moTOR : torArrayList){
+            if (moTOR.getTO_GroupID().equalsIgnoreCase(tor))
+                return true;
+        }
+        return false;
     }
 
     public void getDataTorFromDataBase(){
@@ -59,8 +77,8 @@ public class SerTorDataList {
             }
             torArrayList = tempTorArrayList ;
         }
-        catch (SQLException throwables) {
-            throwables.printStackTrace();
+        catch (SQLException e) {
+            e.printStackTrace();
         }
     }
 

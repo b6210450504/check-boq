@@ -128,7 +128,7 @@ public class ConAddCustomer {
             labelErr.setText("Please insert correct information.");
         }
         else{
-            MoCustomer temp = new MoCustomer(nameTextField.getText(),phoneTextField.getText(),emailTextField.getText()) ;
+            MoCustomer temp = new MoCustomer(nameTextField.getText(), phoneTextField.getText(), emailTextField.getText()) ;
             try{
                 serCusDataList.addCustomer(temp);
                 labelErr.setTextFill(Color.GREEN);

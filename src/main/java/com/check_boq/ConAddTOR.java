@@ -30,7 +30,7 @@ public class ConAddTOR {
     @FXML
     TextField progNameTextField, matTextField, memTextField,periodTextField, matQtyTextField ;
     @FXML
-    TableView matTable ;
+    TableView<MoMatForTor> matTable ;
     @FXML
     TableView<MoMem> memTable ;
     @FXML
@@ -38,17 +38,16 @@ public class ConAddTOR {
     @FXML
     ChoiceBox<String> cusChoiceBox ;
 
-    ArrayList<MoMatForTor> matForTorArrayList ;
-    ObservableList<MoMatForTor> matForTorObservableList;
+    private ArrayList<MoMatForTor> matForTorArrayList ;
+    private ObservableList<MoMatForTor> matForTorObservableList;
 
-    ArrayList<MoMem> memArraylist ;
-    ObservableList<MoMem> moMemObservableList ;
+    private ArrayList<MoMem> memArraylist ;
+    private ObservableList<MoMem> moMemObservableList ;
 
-    MoMatForTor selectMat ;
-    MoMem selectMem ;
-    SerCusDataList serCusDataList ;
-    SerTorDataList serTorDataList ;
-
+    private MoMatForTor selectMat ;
+    private MoMem selectMem ;
+    private SerCusDataList serCusDataList ;
+    private SerTorDataList serTorDataList ;
 
 
     public void initialize(){
@@ -65,7 +64,7 @@ public class ConAddTOR {
                 cusChoiceBox.getItems().addAll(serCusDataList.returnNameArraylist()) ;
                 matTable.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
                     if(newValue != null){
-                        selectMat = (MoMatForTor) newValue;
+                        selectMat = newValue;
                     }
                 });
                 memTable.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
@@ -97,7 +96,6 @@ public class ConAddTOR {
         matTable.setItems(matForTorObservableList) ;
     }
 
-
     public void showTableMem(){
         memTable.getColumns().clear();
         moMemObservableList = FXCollections.observableList(memArraylist) ;
@@ -127,54 +125,80 @@ public class ConAddTOR {
 
     public void eventAddMem(){
         if(memTextField.getText().isEmpty()){
+            errLabel.setTextFill(Color.RED);
             errLabel.setText("Please insert participant information.");
         }
         else if(memTextField.getText().length()>50){
+            errLabel.setTextFill(Color.RED);
             errLabel.setText("Participant is too long!");
         }
         else{
-            memArraylist.add(new MoMem(memTextField.getText())) ;
-            showTableMem();
-            memTextField.clear();
+            if (checkDupMem(memTextField.getText())){
+                errLabel.setTextFill(Color.RED);
+                errLabel.setText("Duplicate participant!");
+
+            }
+            else{
+                memArraylist.add(new MoMem(memTextField.getText())) ;
+                showTableMem();
+                memTextField.clear();
+            }
+
         }
     }
 
     public void eventDelMem(){
-        memArraylist.remove(selectMem) ;
-        showTableMem();
-        memTextField.clear();
+        if(memTable.getSelectionModel().isEmpty()){
+            errLabel.setTextFill(Color.RED);
+            errLabel.setText("Please select participant to delete.");
+        }
+
+        else if(selectMem != null){
+            memArraylist.remove(selectMem) ;
+            showTableMem();
+        }
     }
 
     public void eventAddMat(){
         if(matTextField.getText().isEmpty()){
+            errLabel.setTextFill(Color.RED);
             errLabel.setText("Please insert material information.");
         }
         else if(matQtyTextField.getText().isEmpty()){
             matQtyTextField.setText("1");
         }
         try{
-            int qty = Integer.valueOf(matQtyTextField.getText()) ;
+            int qty = Integer.parseInt(matQtyTextField.getText()) ;
             if(qty <= 0 || qty > 999){
+                errLabel.setTextFill(Color.RED);
                 errLabel.setText("Incorrectly Quantity!");
             }
             else if(matTextField.getText().length() > 50){
+                errLabel.setTextFill(Color.RED);
                 errLabel.setText("Material name is too long.");
             }
             else{
-                MoMatForTor temp = new MoMatForTor (matTextField.getText(),Integer.valueOf(matQtyTextField.getText()));
-                matForTorArrayList.add(temp) ;
-                showTableMat();
-                matTextField.clear();
-                matQtyTextField.clear();
+                MoMatForTor temp = new MoMatForTor (matTextField.getText(),Integer.parseInt(matQtyTextField.getText()));
+                if (checkDupMat(temp.getMat_Name())){
+                    errLabel.setTextFill(Color.RED);
+                    errLabel.setText("Duplicate material!");
+                }
+                else{
+                    matForTorArrayList.add(temp) ;
+                    showTableMat();
+                    matTextField.clear();
+                    matQtyTextField.clear();
+                }
             }
         } catch (NumberFormatException e) {
-//            e.printStackTrace();
+            errLabel.setTextFill(Color.RED);
             errLabel.setText("Incorrectly Material Information");
         }
     }
 
     public void eventDelMat(){
         if(matTable.getSelectionModel().isEmpty()){
+            errLabel.setTextFill(Color.RED);
             errLabel.setText("Please select material to delete.");
         }
         else if(selectMat != null){
@@ -184,40 +208,53 @@ public class ConAddTOR {
     }
 
     public void eventAddButton(){
-        if(progNameTextField.getText().isEmpty()){
+        if(progNameTextField.getText().isEmpty() || periodTextField.getText().isEmpty()){
+            errLabel.setTextFill(Color.RED);
             errLabel.setText("Please insert information.");
         }
-        else if(progNameTextField.getText().length() > 100 || Integer.valueOf(periodTextField.getText()) == 0 ||
-                Integer.valueOf(periodTextField.getText()) > 90 || cusChoiceBox.getItems().isEmpty()){
+        else if(progNameTextField.getText().length() > 100 || Integer.parseInt(periodTextField.getText()) == 0 ||
+                Integer.parseInt(periodTextField.getText()) > 90 || cusChoiceBox.getItems().isEmpty()){
+            errLabel.setTextFill(Color.RED);
             errLabel.setText("Can't add TOR.");
         }
         else if(matForTorArrayList.isEmpty() || memArraylist.isEmpty()){
+            errLabel.setTextFill(Color.RED);
             errLabel.setText("Add some Material or Participant.");
         }
+        else if(cusChoiceBox.getSelectionModel().isEmpty()){
+            errLabel.setTextFill(Color.RED);
+            errLabel.setText("Please select customer.");
+        }
         else{
-            String matStr = "" ;
-            String memStr = "" ;
+            StringBuilder matStr = new StringBuilder();
+            StringBuilder memStr = new StringBuilder();
 
             for(MoMatForTor mat : matForTorArrayList){
-                matStr += mat.getMat_Name() ;
-                matStr += "=" + mat.getMat_Qty() ;
-                matStr += "," ;
+                matStr.append(mat.getMat_Name());
+                matStr.append("=").append(mat.getMat_Qty());
+                matStr.append(",");
             }
 
             for(MoMem mem : memArraylist){
-                memStr += mem.getMem_Name() ;
-                memStr += ","  ;
+                memStr.append(mem.getMem_Name());
+                memStr.append(",");
             }
 
-            matStr = matStr.substring(0,matStr.length()-1) ;
-            memStr = memStr.substring(0,memStr.length()-1) ;
+            matStr = new StringBuilder(matStr.substring(0, matStr.length() - 1));
+            memStr = new StringBuilder(memStr.substring(0, memStr.length() - 1));
 
-            MoTOR temp = new MoTOR(progNameTextField.getText(),matStr,memStr,Integer.valueOf(periodTextField.getText()),
+            MoTOR temp = new MoTOR(progNameTextField.getText(), matStr.toString(), memStr.toString(),Integer.parseInt(periodTextField.getText()),
                     String.valueOf(serCusDataList.searchIDByName(cusChoiceBox.getValue())) ) ;
-            serTorDataList.insetTOR(temp);
-            errLabel.setTextFill(Color.GREEN);
-            errLabel.setText("Add TOR Complete.");
-            clear() ;
+            if (serTorDataList.checkTor(temp.getTO_GroupID())){
+                errLabel.setTextFill(Color.RED);
+                errLabel.setText("This TOR already exists");
+            }
+            else {
+                serTorDataList.insetTOR(temp);
+                errLabel.setTextFill(Color.GREEN);
+                errLabel.setText("Add TOR Complete.");
+                clear();
+            }
         }
     }
 
@@ -233,8 +270,8 @@ public class ConAddTOR {
         moMemObservableList.clear();
         memTable.getColumns().clear();
         matTable.getColumns().clear();
+        cusChoiceBox.getSelectionModel().clearSelection();
     }
-
 
     public void eventBackButton(ActionEvent event) throws IOException {
         root = FXMLLoader.load(getClass().getResource("home.fxml"));
@@ -251,5 +288,21 @@ public class ConAddTOR {
         stage.setTitle("TOR Table");
         stage.setScene(scene);
         stage.show();
+    }
+
+    private boolean checkDupMat(String mat){
+        for (MoMatForTor moMatForTor: matForTorArrayList) {
+            if (moMatForTor.getMat_Name().equalsIgnoreCase(mat))
+                return true;
+        }
+        return false;
+    }
+
+    private boolean checkDupMem(String mem){
+        for (MoMem moMatForTor: memArraylist) {
+            if (moMatForTor.getMem_Name().equalsIgnoreCase(mem))
+                return true;
+        }
+        return false;
     }
 }
