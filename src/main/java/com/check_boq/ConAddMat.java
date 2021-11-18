@@ -49,13 +49,9 @@ public class ConAddMat {
                         selectMat(newValue) ;
                     }
                 });
-                priceTextField.textProperty().addListener(new ChangeListener<String>() {
-                    @Override
-                    public void changed(ObservableValue<? extends String> observable, String oldValue,
-                                        String newValue) {
-                        if (!newValue.matches("\\d*")) {
-                            priceTextField.setText(newValue.replaceAll("[^\\d]", ""));
-                        }
+                priceTextField.textProperty().addListener((observable, oldValue, newValue) -> {
+                    if (!newValue.matches("\\d*")) {
+                        priceTextField.setText(newValue.replaceAll("[^\\d]", ""));
                     }
                 });
             }

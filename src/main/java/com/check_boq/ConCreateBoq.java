@@ -23,7 +23,9 @@ import java.util.List;
 
 public class ConCreateBoq {
     @FXML
-    TableView matTable, matBoqTable ;
+    TableView<MoMaterial> matTable ;
+    @FXML
+    TableView<MoMatForBoq> matBoqTable ;
     @FXML
     TextArea torDesTextArea ;
     @FXML
@@ -31,27 +33,28 @@ public class ConCreateBoq {
     @FXML
     Label totalLabel, idLabel, nameLabel, priceLabel, errLabel ;
     @FXML
-    Button createBoqButton,addButton ;
+    Button createBoqButton, addButton, delButton ;
 
     private Stage stage;
     private Scene scene;
     private Parent root;
 
-    SerMatDataList serMatDataList ;
-    ObservableList<MoMaterial> moMaterialObservableList ;
-    ObservableList<MoMaterial> masterData ;
+    private SerMatDataList serMatDataList ;
+    private ObservableList<MoMaterial> moMaterialObservableList ;
+    private ObservableList<MoMaterial> masterData ;
 
-    ArrayList<MoMatForBoq> moMatForBoqArrayList ;
-    ObservableList<MoMatForBoq> moMatForBoqObservableList ;
+    private ArrayList<MoMatForBoq> moMatForBoqArrayList ;
+    private ObservableList<MoMatForBoq> moMatForBoqObservableList ;
 
-    SerBoqDataList serBoqDataList ;
+    private SerBoqDataList serBoqDataList ;
 
-    MoTOR tor ;
-    long total = 0 ;
+    private MoTOR tor ;
+    private long total = 0 ;
     public void setTOR(MoTOR seTOR){
         this.tor = seTOR ;
     }
-    MoMaterial selectedMaterial ;
+    private MoMaterial selectedMaterial ;
+    private MoMatForBoq selectedMaterialBoq;
 
     @FXML
     public void initialize(){
@@ -68,26 +71,39 @@ public class ConCreateBoq {
                 showTORDes();
                 moMatForBoqArrayList = new ArrayList<>() ;
                 FilteredList<MoMaterial> filteredData = new FilteredList<>(masterData, p -> true);
+
                 find.textProperty().addListener((observable, oldValue, newValue) -> {
                     filteredData.setPredicate(mat -> {
                         String lowerCaseFilter = newValue.toLowerCase();
-                        if (newValue == null || newValue.isEmpty()) {
+                        if (newValue.isEmpty()) {
                             return true;
                         }
-                        if (mat.getMat_Name().toLowerCase().contains(lowerCaseFilter)) {
-                            return true; // Filter matches first name.
-                        }
-                        return false;
+                        return mat.getMat_Name().toLowerCase().contains(lowerCaseFilter); // Filter matches first name.
                     });
                 });
+
                 SortedList<MoMaterial> sortedData = new SortedList<>(filteredData);
                 sortedData.comparatorProperty().bind(matTable.comparatorProperty());
                 matTable.setItems(sortedData);
+
                 matTable.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
                     if (newValue != null) {
-                        showSelectedMat((MoMaterial) newValue);
+                        showSelectedMat( newValue);
                     }
                 });
+
+                qtyTextField.textProperty().addListener((observable, oldValue, newValue) -> {
+                    if (!newValue.matches("\\d*")) {
+                        qtyTextField.setText(newValue.replaceAll("[^\\d]", ""));
+                    }
+                });
+
+                matBoqTable.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+                    if (newValue != null) {
+                        showSelectedMatBoq(newValue);
+                    }
+                });
+
             }
         });
     }
@@ -123,6 +139,10 @@ public class ConCreateBoq {
         matBoqTable.setItems(moMatForBoqObservableList);
     }
 
+    public void showSelectedMatBoq(MoMatForBoq select){
+        qtyTextField.setDisable(false);
+        selectedMaterialBoq = select ;
+    }
 
     public void showSelectedMat(MoMaterial select){
         qtyTextField.setDisable(false);
@@ -132,15 +152,6 @@ public class ConCreateBoq {
         priceLabel.setText(String.valueOf(select.Mat_Price));
     }
 
-    public void onClicked(){
-        if(!matTable.getSelectionModel().isEmpty()){
-            idLabel.setText("...");
-            nameLabel.setText("...");
-            priceLabel.setText("...");
-            qtyTextField.clear();
-            matTable.getSelectionModel().clearSelection();
-        }
-    }
     public void showTORDes(){
         torDesTextArea.appendText("Project Name: " + tor.getTO_Name() + "\n\n");
         torDesTextArea.appendText("GroupID: " + tor.getTO_GroupID() +"\n\n");
@@ -161,6 +172,20 @@ public class ConCreateBoq {
         torDesTextArea.appendText("\n\nPeriod: "+ tor.getTO_Period() + " day.");
     }
 
+    public void onClicked(){
+        if(!matTable.getSelectionModel().isEmpty() || !matBoqTable.getSelectionModel().isEmpty()){
+            idLabel.setText("...");
+            nameLabel.setText("...");
+            priceLabel.setText("...");
+            qtyTextField.clear();
+            matTable.getSelectionModel().clearSelection();
+            matBoqTable.getSelectionModel().clearSelection();
+            errLabel.setText("");
+            qtyTextField.setDisable(false);
+        }
+
+    }
+
     public void eventAdd(){
         if(matTable.getSelectionModel().isEmpty() ){
             errLabel.setText("Please select some Material");
@@ -168,9 +193,12 @@ public class ConCreateBoq {
         else if(qtyTextField.getText().isEmpty() && !matTable.getSelectionModel().isEmpty()){
             qtyTextField.setText("1");
         }
+        else if(Integer.parseInt(qtyTextField.getText()) < 1){
+            errLabel.setText("Please insert more than 0");
+        }
         else{
             MoMatForBoq temp = new MoMatForBoq(selectedMaterial.getMat_ID(),selectedMaterial.getMat_Name(),
-                    selectedMaterial.getMat_Price(),Integer.valueOf(qtyTextField.getText())) ;
+                    selectedMaterial.getMat_Price(),Integer.parseInt(qtyTextField.getText())) ;
             boolean duplicated  = false ;
             for (MoMatForBoq s:moMatForBoqArrayList) {
                 if(s.getMat_ID() == temp.getMat_ID()){
@@ -179,7 +207,7 @@ public class ConCreateBoq {
                     duplicated = true ;
                 }
             }
-            if(duplicated == false){
+            if(!duplicated){
                 moMatForBoqArrayList.add(temp) ;
             }
             showMatBoqTable();
@@ -201,11 +229,18 @@ public class ConCreateBoq {
                 matString += m.getMat_Name() + "=" +m.getMat_Qty() + "," ;
             }
             matString = matString.substring(0,matString.length()-1) ;
-            MoBOQ temp = new MoBOQ(Integer.valueOf(tor.getTO_GroupID()), tor.getTO_Name(),tor.getTO_Member(),matString,total,tor.getTO_Period()) ;
+            MoBOQ temp = new MoBOQ(Integer.parseInt(tor.getTO_GroupID()), tor.getTO_Name(),tor.getTO_Member(),matString,total,tor.getTO_Period()) ;
             serBoqDataList.addBOQToDatabase(temp);
             errLabel.setText("Create BOQ complete.");
             createBoqButton.setDisable(true);
             addButton.setDisable(true);
+        }
+    }
+
+    public void eventDel(){
+        if (!matBoqTable.getSelectionModel().isEmpty()) {
+            delMatBoq(selectedMaterialBoq);
+            onClicked();
         }
     }
 
@@ -216,5 +251,10 @@ public class ConCreateBoq {
         stage.setScene(scene);
         stage.show();
     }
+
+    private void delMatBoq(MoMatForBoq moMatForBoq){
+        moMatForBoqArrayList.removeIf(mat -> mat.getMat_Name().equals(moMatForBoq.getMat_Name()));
+    }
+
 
 }

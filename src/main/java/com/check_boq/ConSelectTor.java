@@ -52,13 +52,10 @@ public class ConSelectTor {
                 nameTextField.textProperty().addListener((observable, oldValue, newValue) -> {
                     filteredData.setPredicate(tor -> {
                         String lowerCaseFilter = newValue.toLowerCase();
-                        if (newValue == null || newValue.isEmpty()) {
+                        if (newValue.isEmpty()) {
                             return true;
                         }
-                        if (tor.getTO_Name().toLowerCase().contains(lowerCaseFilter)) {
-                            return true; // Filter matches first name.
-                        }
-                        return false;
+                        return tor.getTO_Name().toLowerCase().contains(lowerCaseFilter); // Filter matches first name.
                     });
                 });
                 SortedList<MoTOR> sortedData = new SortedList<>(filteredData);
@@ -95,7 +92,7 @@ public class ConSelectTor {
         torTable.getColumns().clear();
         ArrayList<MoTOR> searchList = new ArrayList<>() ;
         for (MoTOR tor: serTorDataList.getTorArrayList()) {
-            if(Integer.valueOf(tor.getTO_GroupID()) == id){
+            if(Integer.parseInt(tor.getTO_GroupID()) == id){
                 searchList.add(tor) ;
             }
         }
@@ -115,8 +112,14 @@ public class ConSelectTor {
     }
 
     public void eventIDSearch(){
-        showTable(Integer.valueOf(idTextField.getText()));
+        try {
+            showTable(Integer.parseInt(idTextField.getText()));
+        }
+        catch (NumberFormatException ignored) {
+
+        }
     }
+
     public void eventBack(ActionEvent event) throws IOException {
         root = FXMLLoader.load(getClass().getResource("home.fxml"));
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();

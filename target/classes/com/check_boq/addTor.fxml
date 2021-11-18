@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.Label?>
@@ -20,11 +21,6 @@
             <Font name="Arial Rounded MT Bold" size="63.0" />
          </font>
       </Text>
-      <Button layoutX="22.0" layoutY="23.0" mnemonicParsing="false" onAction="#eventBackButton" text="Back">
-         <font>
-            <Font name="Arial Rounded MT Bold" size="19.0" />
-         </font>
-      </Button>
       <VBox layoutX="22.0" layoutY="239.0">
          <children>
             <HBox alignment="CENTER">
@@ -178,7 +174,7 @@
          </font>
       </Text>
       <Separator layoutX="535.0" layoutY="37.0" orientation="VERTICAL" prefHeight="695.0" prefWidth="0.0" style="-fx-background-color: black;" />
-      <Label fx:id="errLabel" layoutX="255.0" layoutY="605.0" text="..." textAlignment="CENTER" textFill="RED">
+      <Label fx:id="errLabel" alignment="CENTER" layoutX="160.0" layoutY="605.0" prefHeight="17.0" prefWidth="209.0" text="..." textAlignment="CENTER" textFill="RED">
          <font>
             <Font name="Arial Rounded MT Bold" size="15.0" />
          </font>
@@ -207,6 +203,14 @@
          <font>
             <Font name="Arial Rounded MT Bold" size="19.0" />
          </font>
+      </Button>
+      <Button layoutX="26.0" layoutY="24.0" mnemonicParsing="false" onAction="#eventBackButton" prefHeight="36.0" prefWidth="63.0" style="-fx-background-radius: 35;" text="Back">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="15.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
       </Button>
    </children>
 </AnchorPane>
