@@ -203,7 +203,7 @@ public class ConCreateBoq {
             for (MoMatForBoq s:moMatForBoqArrayList) {
                 if(s.getMat_ID() == temp.getMat_ID()){
                     s.setMat_Qty(temp.getMat_Qty()+s.getMat_Qty());
-                    s.setMat_Total(s.getMat_Price() * s.getMat_Qty());
+                    s.setMat_Total((long) s.getMat_Price() * s.getMat_Qty());
                     duplicated = true ;
                 }
             }
@@ -211,10 +211,7 @@ public class ConCreateBoq {
                 moMatForBoqArrayList.add(temp) ;
             }
             showMatBoqTable();
-            for (MoMatForBoq v:moMatForBoqArrayList) {
-                total += v.getMat_Total() ;
-            }
-            totalLabel.setText(String.valueOf(total));
+            setTotal();
             onClicked();
         }
     }
@@ -224,12 +221,12 @@ public class ConCreateBoq {
             errLabel.setText("Please add some material.");
         }
         else{
-            String matString = "" ;
+            StringBuilder matString = new StringBuilder();
             for (MoMatForBoq m:moMatForBoqArrayList) {
-                matString += m.getMat_Name() + "=" +m.getMat_Qty() + "," ;
+                matString.append(m.getMat_Name()).append("=").append(m.getMat_Qty()).append(",");
             }
-            matString = matString.substring(0,matString.length()-1) ;
-            MoBOQ temp = new MoBOQ(Integer.parseInt(tor.getTO_GroupID()), tor.getTO_Name(),tor.getTO_Member(),matString,total,tor.getTO_Period()) ;
+            matString = new StringBuilder(matString.substring(0, matString.length() - 1));
+            MoBOQ temp = new MoBOQ(Integer.parseInt(tor.getTO_GroupID()), tor.getTO_Name(),tor.getTO_Member(), matString.toString(),total,tor.getTO_Period()) ;
             serBoqDataList.addBOQToDatabase(temp);
             errLabel.setText("Create BOQ complete.");
             createBoqButton.setDisable(true);
@@ -242,6 +239,7 @@ public class ConCreateBoq {
             delMatBoq(selectedMaterialBoq);
             onClicked();
         }
+        setTotal();
     }
 
     public void eventBackButton(ActionEvent event) throws IOException {
@@ -256,5 +254,17 @@ public class ConCreateBoq {
         moMatForBoqArrayList.removeIf(mat -> mat.getMat_Name().equals(moMatForBoq.getMat_Name()));
     }
 
+    private void setTotal(){
+        if (!moMatForBoqArrayList.isEmpty()) {
+            total = 0;
+            for (MoMatForBoq v:moMatForBoqArrayList)
+                total += v.getMat_Total() ;
+
+            totalLabel.setText(String.valueOf(total));
+        }
+        else
+            totalLabel.setText("...");
+
+    }
 
 }

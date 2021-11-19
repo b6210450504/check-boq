@@ -18,7 +18,7 @@
             <Font name="Arial Rounded MT Bold" size="15.0" />
          </font>
       </TextArea>
-      <Text layoutX="21.0" layoutY="99.0" strokeType="OUTSIDE" strokeWidth="0.0" text="TOR Description">
+      <Text layoutX="13.0" layoutY="99.0" strokeType="OUTSIDE" strokeWidth="0.0" text="TOR Description">
          <font>
             <Font name="Arial Rounded MT Bold" size="34.0" />
          </font>
@@ -86,7 +86,7 @@
             <Font name="Arial Rounded MT Bold" size="16.0" />
          </font>
       </Text>
-      <Button fx:id="addButton" layoutX="622.0" layoutY="702.0" mnemonicParsing="false" onAction="#eventAdd" prefHeight="39.0" prefWidth="63.0" text="Add">
+      <Button fx:id="addButton" layoutX="629.0" layoutY="702.0" mnemonicParsing="false" onAction="#eventAdd" prefHeight="39.0" prefWidth="63.0" text="Add">
          <font>
             <Font name="Arial Rounded MT Bold" size="17.0" />
          </font>
@@ -102,14 +102,14 @@
             <Font name="Arial Rounded MT Bold" size="22.0" />
          </font>
       </Text>
-      <Text layoutX="128.0" layoutY="43.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Create BOQ">
+      <Text layoutX="128.0" layoutY="48.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Create BOQ">
          <font>
             <Font name="Arial Rounded MT Bold" size="44.0" />
          </font>
       </Text>
       <TextField fx:id="find" layoutX="752.0" layoutY="479.0" prefHeight="25.0" prefWidth="248.0" />
       <Separator layoutX="821.0" layoutY="518.0" orientation="VERTICAL" prefHeight="225.0" prefWidth="6.0" style="-fx-background-color: blue;" />
-      <Button fx:id="createBoqButton" layoutX="851.0" layoutY="614.0" mnemonicParsing="false" onAction="#eventCreateBOQ" prefHeight="51.0" prefWidth="146.0" text="Create BOQ">
+      <Button fx:id="createBoqButton" layoutX="852.0" layoutY="599.0" mnemonicParsing="false" onAction="#eventCreateBOQ" prefHeight="51.0" prefWidth="146.0" text="Create BOQ">
          <font>
             <Font name="Arial Rounded MT Bold" size="20.0" />
          </font>

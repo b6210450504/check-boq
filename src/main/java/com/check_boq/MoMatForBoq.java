@@ -12,7 +12,7 @@ public class MoMatForBoq {
         Mat_Name = mat_Name;
         Mat_Price = mat_Price;
         Mat_Qty = mat_Qty;
-        Mat_Total = mat_Price * mat_Qty ;
+        Mat_Total = (long) mat_Price * mat_Qty ;
     }
 
 
