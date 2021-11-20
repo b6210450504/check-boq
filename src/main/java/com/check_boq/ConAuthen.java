@@ -24,8 +24,6 @@ public class ConAuthen {
     @FXML
     Label errMes ;
 
-    private String password =  "123456" ;
-
 
     public void initialize(){
         Platform.runLater(new Runnable() {
@@ -34,17 +32,17 @@ public class ConAuthen {
                 errMes.setMaxWidth(Double.MAX_VALUE);
                 errMes.setAlignment(Pos.CENTER);
                 // for test only
-                passwordField.setText(password);
+                passwordField.setText("");
             }
         });
     }
 
 
     public void eventSignIn(ActionEvent event) throws IOException {
-        if(password.isEmpty()){
+        if(passwordField.getText().isEmpty()){
             errMes.setText("Please insert pin/password.");
         }
-        else if(password.equals(passwordField.getText())){
+        else if(passwordField.getText().equals("123456")){
             root = FXMLLoader.load(getClass().getResource("checkBoq.fxml"));
             stage = (Stage)((Node)event.getSource()).getScene().getWindow();
             scene = new Scene(root);
