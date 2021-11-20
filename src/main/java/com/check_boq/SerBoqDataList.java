@@ -75,7 +75,7 @@ public class SerBoqDataList {
         query += "\"" + toAdd.getBO_ProjName() + "\"" + "," ;
         query += "\"" + toAdd.getBO_Member() + "\"" + "," ;
         query += "\"" + toAdd.getBO_Materials() + "\"" + "," ;
-        query += toAdd.getBO_Amount() + "," ;
+        query += toAdd.getBO_Price() + "," ;
         query += toAdd.getBO_Period() + ")" ;
         try{
             Statement statement = connectionDb.createStatement();

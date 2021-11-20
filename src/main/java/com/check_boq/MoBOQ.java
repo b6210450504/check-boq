@@ -71,11 +71,11 @@ public class MoBOQ {
         this.BO_Materials = BO_MaterialsID;
     }
 
-    public long getBO_Amount() {
+    public long getBO_Price() {
         return BO_Price;
     }
 
-    public void setBO_Amount(long BO_Price) {
+    public void setBO_Price(long BO_Price) {
         this.BO_Price = BO_Price;
     }
 
