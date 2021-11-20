@@ -6,28 +6,28 @@ public class MoBOQ {
     String BO_ProjName ;
     String BO_Member ;
     String BO_Materials ;
-    long BO_Amount ;
+    long BO_Price ;
     int BO_Period ;
 
     public MoBOQ() {
     }
 
-    public MoBOQ(int BO_GroupID, String BO_ProjName, String BO_Member, String BO_Materials, long BO_Amount, int BO_Period) {
+    public MoBOQ(int BO_GroupID, String BO_ProjName, String BO_Member, String BO_Materials, long BO_Price, int BO_Period) {
         this.BO_GroupID = BO_GroupID;
         this.BO_ProjName = BO_ProjName;
         this.BO_Member = BO_Member;
         this.BO_Materials = BO_Materials;
-        this.BO_Amount = BO_Amount;
+        this.BO_Price = BO_Price;
         this.BO_Period = BO_Period;
     }
 
-    public MoBOQ(int BO_GroupID, int BO_ID, String BO_ProjName, String BO_Member, String BO_Materials, long BO_Amount, int BO_Period) {
+    public MoBOQ(int BO_GroupID, int BO_ID, String BO_ProjName, String BO_Member, String BO_Materials, long BO_Price, int BO_Period) {
         this.BO_GroupID = BO_GroupID;
         this.BO_ID = BO_ID;
         this.BO_ProjName = BO_ProjName;
         this.BO_Member = BO_Member;
         this.BO_Materials = BO_Materials;
-        this.BO_Amount = BO_Amount;
+        this.BO_Price = BO_Price;
         this.BO_Period = BO_Period;
     }
 
@@ -72,11 +72,11 @@ public class MoBOQ {
     }
 
     public long getBO_Amount() {
-        return BO_Amount;
+        return BO_Price;
     }
 
-    public void setBO_Amount(long BO_Amount) {
-        this.BO_Amount = BO_Amount;
+    public void setBO_Amount(long BO_Price) {
+        this.BO_Price = BO_Price;
     }
 
     public int getBO_Period() {
@@ -95,7 +95,7 @@ public class MoBOQ {
                 ", BO_ProjName='" + BO_ProjName + '\'' +
                 ", BO_Member='" + BO_Member + '\'' +
                 ", BO_MaterialsID='" + BO_Materials + '\'' +
-                ", BO_Amount=" + BO_Amount +
+                ", BO_Price=" + BO_Price +
                 ", BO_Period=" + BO_Period +
                 '}';
     }

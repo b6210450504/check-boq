@@ -20,14 +20,14 @@ public class SerBoqDataList {
         try{
             Statement statement = connectionDb.createStatement();
             ResultSet queryOutPut = statement.executeQuery(query);
-//            MoBOQ(int BO_GroupID, int BO_ID, String BO_ProjName, String BO_Member, String BO_Materials, long BO_Amount, int BO_Period)
+//            MoBOQ(int BO_GroupID, int BO_ID, String BO_ProjName, String BO_Member, String BO_Materials, long BO_Price, int BO_Period)
             while (queryOutPut.next()) {
                 temp.add(new MoBOQ(queryOutPut.getInt("BO_GroupID"),
                         queryOutPut.getInt("BO_ID"),
                         queryOutPut.getString("BO_Name"),
                         queryOutPut.getString("BO_Member"),
                         queryOutPut.getString("BO_Materials"),
-                        queryOutPut.getLong("BO_Amount"),
+                        queryOutPut.getLong("BO_Price"),
                         queryOutPut.getInt("BO_Period")
                         )) ;
             }
@@ -45,22 +45,22 @@ public class SerBoqDataList {
         try{
             Statement statement = connectionDb.createStatement();
             ResultSet queryOutPut = statement.executeQuery(query);
-//            MoBOQ(int BO_GroupID, int BO_ID, String BO_ProjName, String BO_Member, String BO_Materials, long BO_Amount, int BO_Period)
+//            MoBOQ(int BO_GroupID, int BO_ID, String BO_ProjName, String BO_Member, String BO_Materials, long BO_Price, int BO_Period)
             while (queryOutPut.next()) {
                 temp.add(new MoBOQ(queryOutPut.getInt("BO_GroupID"),
                         queryOutPut.getInt("BO_ID"),
                         queryOutPut.getString("BO_Name"),
                         queryOutPut.getString("BO_Member"),
                         queryOutPut.getString("BO_Materials"),
-                        queryOutPut.getLong("BO_Amount"),
+                        queryOutPut.getLong("BO_Price"),
                         queryOutPut.getInt("BO_Period")
                 )) ;
             }
             boqArrayList = temp ;
 //            System.out.println(boqArrayList.toString());
         }
-        catch (SQLException throwables) {
-            throwables.printStackTrace();
+        catch (SQLException e) {
+            e.printStackTrace();
         }
     }
 
@@ -70,7 +70,7 @@ public class SerBoqDataList {
     }
 
     public void addBOQToDatabase(MoBOQ toAdd){
-        String query = "INSERT INTO check_boq.boq (BO_GroupID, BO_Name, BO_Member, BO_Materials, BO_Amount, BO_Period) VALUES(" ;
+        String query = "INSERT INTO check_boq.boq (BO_GroupID, BO_Name, BO_Member, BO_Materials, BO_Price, BO_Period) VALUES(" ;
         query += toAdd.getBO_GroupID() + "," ;
         query += "\"" + toAdd.getBO_ProjName() + "\"" + "," ;
         query += "\"" + toAdd.getBO_Member() + "\"" + "," ;
@@ -80,8 +80,8 @@ public class SerBoqDataList {
         try{
             Statement statement = connectionDb.createStatement();
             statement.executeUpdate(query) ;
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
     }
 
@@ -91,8 +91,8 @@ public class SerBoqDataList {
         try{
             Statement statement = connectionDb.createStatement();
             statement.executeUpdate(query) ;
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
     }
 }

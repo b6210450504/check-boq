@@ -245,16 +245,16 @@ public class ConAddTOR {
 
             MoTOR temp = new MoTOR(progNameTextField.getText(), matStr.toString(), memStr.toString(),Integer.parseInt(periodTextField.getText()),
                     String.valueOf(serCusDataList.searchIDByName(cusChoiceBox.getValue())) ) ;
-            if (serTorDataList.checkTor(temp.getTO_GroupID())){
-                errLabel.setTextFill(Color.RED);
-                errLabel.setText("This TOR already exists");
-            }
-            else {
-                serTorDataList.insetTOR(temp);
-                errLabel.setTextFill(Color.GREEN);
-                errLabel.setText("Add TOR Complete.");
-                clear();
-            }
+//            if (serTorDataList.checkTor(temp.getTO_GroupID())){
+//                errLabel.setTextFill(Color.RED);
+//                errLabel.setText("This TOR already exists");
+//            }
+
+            serTorDataList.insetTOR(temp);
+            errLabel.setTextFill(Color.GREEN);
+            errLabel.setText("Add TOR Complete.");
+            clear();
+
         }
     }
 

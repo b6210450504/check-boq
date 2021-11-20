@@ -11,6 +11,7 @@ public class SerCusDataList implements SerDataList {
     private ArrayList<MoCustomer> customerArrayList;
     SerDatabaseConnection dbCon ;
     Connection connectionDb ;
+
     public SerCusDataList() {
         ArrayList<MoCustomer> tempCusArrayList = new ArrayList<>() ;
         dbCon = new SerDatabaseConnection() ;
@@ -27,8 +28,8 @@ public class SerCusDataList implements SerDataList {
             }
             customerArrayList = tempCusArrayList ;
         }
-        catch (SQLException throwables) {
-            throwables.printStackTrace();
+        catch (SQLException e) {
+            e.printStackTrace();
         }
     }
 
@@ -68,6 +69,7 @@ public class SerCusDataList implements SerDataList {
             e.printStackTrace();
         }
     }
+
     public void updateCusToDatabase(MoCustomer newCus, MoCustomer oldCus){
         String query = "UPDATE check_boq.customer SET " ;
         query+= "CS_Name = " + "\"" + newCus.getCS_Name() + "\"" + "," ;
@@ -110,8 +112,6 @@ public class SerCusDataList implements SerDataList {
         }
         return null ;
     }
-
-
 
     public void deleteCustomer(int id){
         String query = "DELETE FROM check_boq.customer WHERE CS_ID =" + id ;

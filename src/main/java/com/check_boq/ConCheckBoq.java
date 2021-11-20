@@ -28,7 +28,6 @@ import javax.mail.*;
 import javax.mail.internet.*;
 import java.awt.*;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -46,35 +45,39 @@ public class ConCheckBoq {
 
     // boq data
     @FXML
-    TableView boqTable, matTable ;
+    TableView<MoBOQ> boqTable;
+    @FXML
+    TableView<MoMatForBoq> matTable ;
     @FXML
     TextField searchBOQ ;
     @FXML
     Label idLabel, groupIDLabel, nameLabel, periodLabel,errLabel ;
     @FXML
     TextArea boqMemTextArea ;
-    SerBoqDataList serBoqDataList ;
-    ObservableList<MoBOQ> moBOQObservableList ;
-    ObservableList<MoBOQ> masterData ;
-    ObservableList<MoMatForBoq> masterDataMat ;
-    MoBOQ selectedBoq ;
+
+    private SerBoqDataList serBoqDataList ;
+    private ObservableList<MoBOQ> moBOQObservableList ;
+    private ObservableList<MoBOQ> masterData ;
+    private ObservableList<MoMatForBoq> masterDataMat ;
+    private MoBOQ selectedBoq ;
 
     // tor data
     @FXML
     TextArea torTextArea ;
-    SerTorDataList serTorDataList ;
+    private SerTorDataList serTorDataList ;
 
     // customer data
-    SerCusDataList serCusDataList ;
+    private SerCusDataList serCusDataList ;
 
     // materials data
     @FXML
     TextField searchMat ;
-    SerMatDataList serMatDataList ;
-    ArrayList<MoMatForBoq> moMatForBoqs ;
+
+    private SerMatDataList serMatDataList ;
+    private ArrayList<MoMatForBoq> moMatForBoqs ;
     @FXML
     Label totalLabel ;
-    int total = 0 ;
+    private int total = 0 ;
 
 
 
@@ -96,7 +99,7 @@ public class ConCheckBoq {
                 searchBOQ.textProperty().addListener((observable, oldValue, newValue) -> {
                     filteredData.setPredicate(boq -> {
                         String lowerCaseFilter = newValue.toLowerCase();
-                        if (newValue == null || newValue.isEmpty()) {
+                        if (newValue.isEmpty()) {
                             return true;
                         }
                         if (boq.getBO_ProjName().toLowerCase().contains(lowerCaseFilter)) {
@@ -187,20 +190,20 @@ public class ConCheckBoq {
     }
 
     public void showMatBoq(String mat){
+        total = 0;
         ArrayList<MoMatForBoq> matForShow = new ArrayList<>() ;
 
-        List<String> list = new ArrayList<String>(Arrays.asList(mat.split(",")));
+        List<String> list = new ArrayList<>(Arrays.asList(mat.split(",")));
         // "{name=qty, name=qty}"
         List<String> list2 ;
 //        ArrayList<String> matName = new ArrayList<>() ;
 //        ArrayList<String> matQty = new ArrayList<>() ;
-        for(int i = 0 ; i < list.size(); i++){
-            list2 = new ArrayList<String>(Arrays.asList(list.get(i).split("="))) ;
+        for (String s : list) {
+            list2 = new ArrayList<>(Arrays.asList(s.split("=")));
 //            matName.add(list2.get(0)) ;
 //            matQty.add(list2.get(1)) ;
-            MoMaterial temp = serMatDataList.getMatInfoByName(list2.get(0)) ;
-            // (int mat_ID, String mat_Name, int mat_Price, int mat_Qty)
-            matForShow.add(new MoMatForBoq(temp.getMat_ID(),temp.getMat_Name(),temp.getMat_Price(),Integer.valueOf(list2.get(1)))) ;
+            MoMaterial temp = serMatDataList.getMatInfoByName(list2.get(0));
+            matForShow.add(new MoMatForBoq(temp.getMat_ID(), temp.getMat_Name(), temp.getMat_Price(), Integer.parseInt(list2.get(1))));
         }
         for (MoMatForBoq t: matForShow) {
             total += t.getMat_Total() ;
@@ -335,18 +338,7 @@ public class ConCheckBoq {
     public void eventDecline() throws IOException {
         if(!boqTable.getSelectionModel().isEmpty()){
             errLabel.setText("BOQ has been delete.");
-            excelButton.setDisable(true);
-            declineButton.setDisable(true);
-            accButton.setDisable(true);
-            torTextArea.clear();
-            totalLabel.setText(null);
-            nameLabel.setText(null);
-            periodLabel.setText(null);
-            groupIDLabel.setText(null);
-            idLabel.setText(null);
-            boqMemTextArea.clear();
-            matTable.getColumns().clear();
-            boqTable.getSelectionModel().clearSelection();
+            clearInput();
             serBoqDataList.delBoqOnDatabase(selectedBoq.getBO_ID());
             showBoqTable();
         }
@@ -357,22 +349,10 @@ public class ConCheckBoq {
         File file = new File("Excel/" + selectedBoq.getBO_ProjName() + ".xlsx") ;
         if(file.exists()){
             Desktop.getDesktop().open(new File("Excel/" + selectedBoq.getBO_ProjName() + ".xlsx"));
-            excelButton.setDisable(true);
-            declineButton.setDisable(true);
-            accButton.setDisable(true);
-            torTextArea.clear();
-            totalLabel.setText(null);
-            nameLabel.setText(null);
-            periodLabel.setText(null);
-            groupIDLabel.setText(null);
-            idLabel.setText(null);
-            boqMemTextArea.clear();
-            matTable.getColumns().clear();
-            boqTable.getSelectionModel().clearSelection();
+            clearInput();
             showBoqTable();
         }
     }
-
 
     public void eventBack( ActionEvent event) throws IOException {
         root = FXMLLoader.load(getClass().getResource("home.fxml"));
@@ -381,4 +361,20 @@ public class ConCheckBoq {
         stage.setScene(scene);
         stage.show();
     }
+
+    private void clearInput() {
+        excelButton.setDisable(true);
+        declineButton.setDisable(true);
+        accButton.setDisable(true);
+        torTextArea.clear();
+        totalLabel.setText(null);
+        nameLabel.setText(null);
+        periodLabel.setText(null);
+        groupIDLabel.setText(null);
+        idLabel.setText(null);
+        boqMemTextArea.clear();
+        matTable.getColumns().clear();
+        boqTable.getSelectionModel().clearSelection();
+    }
+
 }
