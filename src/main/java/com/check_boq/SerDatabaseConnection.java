@@ -7,7 +7,6 @@ public class SerDatabaseConnection {
     public Connection databaseLink;
 
     public Connection getConnection(){
-
         String databaseName = "check_boq";
         String databaseUser = "root";
         String databasePass = "_JL=z+jV7x%Fu+aHYp$";
